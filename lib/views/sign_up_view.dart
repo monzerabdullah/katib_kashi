@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/views/home_view.dart';
 import 'package:katib_kashi/views/sign_in_view.dart';
 
 class SignUpView extends StatelessWidget {
@@ -125,7 +126,14 @@ class SignUpView extends StatelessWidget {
                       ),
                       const SizedBox(height: 35),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const HomeView(),
+                            ),
+                          );
+                        },
                         child: Container(
                           height: 62,
                           width: double.infinity,
@@ -161,7 +169,7 @@ class SignUpView extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => SignInView(),
+                                  builder: (_) => const SignInView(),
                                 ),
                               );
                             },
