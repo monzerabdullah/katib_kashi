@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.menu,
             color: kPrimary,
           ),
         ),
@@ -97,57 +97,6 @@ class _HomeViewState extends State<HomeView> {
             ),
           )
         ],
-      ),
-      bottomNavigationBar: NavigationBarTheme(
-        data: const NavigationBarThemeData(
-          labelTextStyle: MaterialStatePropertyAll(
-            TextStyle(color: kWhite),
-          ),
-        ),
-        child: NavigationBar(
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          backgroundColor: kPrimary,
-          indicatorColor: kIndicatorColor,
-          selectedIndex: currentPageIndex,
-          destinations: const <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(
-                Icons.home,
-                color: kWhite,
-              ),
-              icon: Icon(
-                Icons.home_outlined,
-                color: kWhite,
-              ),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Icon(
-                Icons.list,
-                color: kWhite,
-              ),
-              label: 'Transactions',
-            ),
-            NavigationDestination(
-              icon: Icon(
-                Icons.credit_card,
-                color: kWhite,
-              ),
-              label: 'Cards',
-            ),
-            NavigationDestination(
-              icon: Icon(
-                Icons.settings,
-                color: kWhite,
-              ),
-              label: 'Settings',
-            ),
-          ],
-        ),
       ),
     );
   }
