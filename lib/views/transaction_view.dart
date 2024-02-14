@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/views/confirm_transaction_view.dart';
 import 'package:katib_kashi/views/home_view.dart';
 import 'package:katib_kashi/views/sign_up_view.dart';
 
@@ -28,71 +29,90 @@ class _TransactionViewState extends State<TransactionView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimary,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: kWhite,
+          ),
+        ),
+        title: const Text(
+          'Enter the money',
+          style: TextStyle(
+            color: kWhite,
+          ),
+        ),
+        centerTitle: true,
+      ),
       backgroundColor: kPrimary,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: 300,
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  Container(
-                    width: 220,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: const LinearGradient(
-                        colors: [
-                          Colors.blue,
-                          Colors.purple,
-                        ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: 300,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Container(
+                      width: 220,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Colors.blue,
+                            Colors.purple,
+                          ],
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text(
+                        '5678',
+                        style: TextStyle(
+                          fontSize: 24.0,
+                          color: kWhite,
+                        ),
                       ),
                     ),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      '5678',
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Text(
+                      'Money transfers from monzer card',
                       style: TextStyle(
-                        fontSize: 24.0,
+                        fontSize: 20.0,
                         color: kWhite,
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Text(
-                    'Money transfers from monzer card',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: kWhite,
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    '\$50320',
-                    style: TextStyle(
-                      fontSize: 52.0,
-                      color: kWhite,
-                      fontWeight: FontWeight.w500,
+                    const Text(
+                      '\$50320',
+                      style: TextStyle(
+                        fontSize: 52.0,
+                        color: kWhite,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  const Text(
-                    'Maximum Is 100,000',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: kDark,
+                    const Text(
+                      'Maximum Is 100,000',
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: kDark,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Container(
+              Container(
                 padding: const EdgeInsets.all(20),
                 width: double.infinity,
                 decoration: const BoxDecoration(
@@ -110,14 +130,14 @@ class _TransactionViewState extends State<TransactionView> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          mainAxisExtent: 100,
+                          mainAxisExtent: 90,
                         ),
                         itemBuilder: (context, index) {
                           final button = buttons[index];
                           if (button == 'del') {
-                            return Icon(Icons.backspace);
+                            return const Icon(Icons.backspace);
                           } else if (button == '') {
-                            return Text('');
+                            return const Text('');
                           }
                           return MyButton(
                             label: button,
@@ -126,11 +146,18 @@ class _TransactionViewState extends State<TransactionView> {
                         itemCount: buttons.length,
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (cotext) => ConfirmTransactionView(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 52,
                         width: double.infinity,
@@ -152,8 +179,8 @@ class _TransactionViewState extends State<TransactionView> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

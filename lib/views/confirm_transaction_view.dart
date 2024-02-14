@@ -7,6 +7,25 @@ class ConfirmTransactionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimary,
+      appBar: AppBar(
+        backgroundColor: kPrimary,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: kWhite,
+          ),
+        ),
+        title: const Text(
+          'Enter the money',
+          style: TextStyle(
+            color: kWhite,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Column(
           children: [

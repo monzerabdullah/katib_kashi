@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/views/transaction_view.dart';
+import 'package:katib_kashi/views/transactions_view.dart';
 import 'package:katib_kashi/views/widgets/custom_slider.dart';
 
 class HomeView extends StatefulWidget {
@@ -39,64 +41,71 @@ class _HomeViewState extends State<HomeView> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          const CustomSlider(),
-          const SizedBox(
-            height: 20,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ActionButton(
-                  icon: Icons.arrow_circle_up,
-                  label: 'Send',
-                ),
-                ActionButton(
-                  icon: Icons.arrow_circle_down,
-                  label: 'Recive',
-                ),
-                ActionButton(
-                  icon: Icons.swap_vertical_circle_outlined,
-                  label: 'Exchange',
-                ),
-                ActionButton(
-                  icon: Icons.more_horiz,
-                  label: 'More',
-                ),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const CustomSlider(),
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Recent Transactions',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+            const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ActionButton(
+                    icon: Icons.arrow_circle_up,
+                    label: 'Send',
                   ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'View all',
+                  ActionButton(
+                    icon: Icons.arrow_circle_down,
+                    label: 'Recive',
+                  ),
+                  ActionButton(
+                    icon: Icons.swap_vertical_circle_outlined,
+                    label: 'Exchange',
+                  ),
+                  ActionButton(
+                    icon: Icons.more_horiz,
+                    label: 'More',
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Recent Transactions',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: kSecondary,
                     ),
                   ),
-                )
-              ],
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'View all',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: kSecondary,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          )
-        ],
+            Transaction(),
+            Transaction(),
+            Transaction(),
+            Transaction(),
+            Transaction(),
+          ],
+        ),
       ),
     );
   }
@@ -123,7 +132,14 @@ class ActionButton extends StatelessWidget {
             style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(kGrey),
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TransactionView(),
+                ),
+              );
+            },
             icon: Icon(
               icon,
             ),
