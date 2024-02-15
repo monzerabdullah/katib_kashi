@@ -4,7 +4,7 @@ import 'package:katib_kashi/views/home_view.dart';
 
 class NewCardView extends StatelessWidget {
   const NewCardView({super.key});
-
+  //it should be a ShowModel
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +13,9 @@ class NewCardView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimary,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(
             Icons.arrow_back,
             color: kWhite,

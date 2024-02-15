@@ -104,11 +104,15 @@ class Transaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {},
-      child: const ListTile(
+      child: ListTile(
         contentPadding: EdgeInsets.all(10),
         leading: CircleAvatar(
           radius: 32,
-          child: Icon(Icons.arrow_outward),
+          child: Icon(
+            Icons.arrow_outward,
+            color: kSecondary,
+          ),
+          backgroundColor: kGrey,
         ),
         title: Text(
           'Monzer Abdullah',
