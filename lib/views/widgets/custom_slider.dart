@@ -19,8 +19,8 @@ final List<Widget> cardsSlider = cardList
           borderRadius: BorderRadius.circular(20),
           gradient: const LinearGradient(
             colors: [
-              kPrimary,
               kSecondary,
+              kPrimary,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
