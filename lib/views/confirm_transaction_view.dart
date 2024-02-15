@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:katib_kashi/main.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/views/home_view.dart';
 
@@ -73,7 +74,7 @@ class ConfirmTransactionView extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeView(),
+                      builder: (context) => MyApp(),
                     ),
                   );
                 },
