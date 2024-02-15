@@ -65,20 +65,6 @@ class _TransactionViewState extends State<TransactionView> {
               const SizedBox(
                 height: 80,
               ),
-              const DropdownMenu(
-                menuStyle: MenuStyle(
-                  backgroundColor: MaterialStatePropertyAll(kGrey),
-                  surfaceTintColor: MaterialStatePropertyAll(kGrey),
-                ),
-                dropdownMenuEntries: [
-                  DropdownMenuEntry(value: 'value', label: 'Recived'),
-                  DropdownMenuEntry(value: 'value', label: 'Send'),
-                  DropdownMenuEntry(value: 'value', label: 'Exchange'),
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
               TextField(
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
@@ -94,6 +80,20 @@ class _TransactionViewState extends State<TransactionView> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const DropdownMenu(
+                menuStyle: MenuStyle(
+                  backgroundColor: MaterialStatePropertyAll(kGrey),
+                  surfaceTintColor: MaterialStatePropertyAll(kGrey),
+                ),
+                dropdownMenuEntries: [
+                  DropdownMenuEntry(value: 'value', label: 'Recived'),
+                  DropdownMenuEntry(value: 'value', label: 'Send'),
+                  DropdownMenuEntry(value: 'value', label: 'Exchange'),
+                ],
               ),
               const SizedBox(
                 height: 30,
