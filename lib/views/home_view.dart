@@ -12,11 +12,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: kWhite,
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(
@@ -54,15 +54,15 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ActionButton(
-                    icon: Icons.arrow_circle_up,
+                    icon: Icons.arrow_upward,
                     label: 'Send',
                   ),
                   ActionButton(
-                    icon: Icons.arrow_circle_down,
+                    icon: Icons.arrow_downward,
                     label: 'Recive',
                   ),
                   ActionButton(
-                    icon: Icons.swap_vertical_circle_outlined,
+                    icon: Icons.swap_vert,
                     label: 'Exchange',
                   ),
                   ActionButton(
