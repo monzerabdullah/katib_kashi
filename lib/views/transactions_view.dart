@@ -14,7 +14,9 @@ class TransactionsView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
             icon: const Icon(
               Icons.arrow_back,
               color: kPrimary,

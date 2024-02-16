@@ -86,7 +86,13 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context, rootNavigator: false).push(
+                        MaterialPageRoute(
+                          builder: (context) => TransactionsView(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       'View all',
                       style: TextStyle(
