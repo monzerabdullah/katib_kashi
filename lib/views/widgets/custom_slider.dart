@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:katib_kashi/models/card.dart';
 import 'package:katib_kashi/utils/constants.dart';
 
-final List<String> cardList = [
-  'Card Number 1',
-  'Card Number 2',
-  'Card Number 3',
-  'Card Number 4',
-  'Card Number 5',
-];
+List<CardModel> cardsList = [];
 
-final List<Widget> cardsSlider = cardList
+final List<Widget> cardsSlider = cardsList
     .map(
       (card) => Container(
         margin: const EdgeInsets.all(5.0),
@@ -33,7 +28,7 @@ final List<Widget> cardsSlider = cardList
             children: [
               Expanded(
                 child: Text(
-                  card,
+                  card.cardOwnerName,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -42,9 +37,9 @@ final List<Widget> cardsSlider = cardList
                 ),
               ),
               const SizedBox(height: 30),
-              const Text(
-                '****    ****    ****    8607',
-                style: TextStyle(
+              Text(
+                '****    ****    ****    ${card.cardNumber}',
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: kWhite,
@@ -60,9 +55,9 @@ final List<Widget> cardsSlider = cardList
                 ),
               ),
               const SizedBox(height: 8.0),
-              const Text(
-                '450,300900',
-                style: TextStyle(
+              Text(
+                '${card.cardCurrentBalance}',
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: kWhite,
