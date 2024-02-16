@@ -1,5 +1,5 @@
-class Card {
-  Card({
+class CardModel {
+  CardModel({
     required this.cardOwnerName,
     required this.cardCurrentBalance,
     required this.cardNumber,
