@@ -135,10 +135,13 @@ class TransactionWidget extends StatelessWidget {
             fontSize: 18.0,
           ),
         ),
-        subtitle: Text(dateTime.toString(),
-            style: TextStyle(
-              color: Color(0xFFBDBDBD),
-            )),
+        subtitle: Text(
+          '${dateTime.hour}:${dateTime.minute} ${dateTime.hashCode >= 12 ? 'PM' : 'AM'} • ${dateTime.month} ${dateTime.day},${dateTime.year}',
+          style: TextStyle(
+            color: Color(0xFFBDBDBD),
+            fontSize: 14,
+          ),
+        ),
         trailing: Text(
           '$amount EGP',
           style: TextStyle(
