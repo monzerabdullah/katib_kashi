@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:katib_kashi/main.dart';
 import 'package:katib_kashi/models/transaction.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
@@ -15,7 +16,9 @@ class TransactionsView extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MyApp()),
+              );
             },
             icon: const Icon(
               Icons.arrow_back,

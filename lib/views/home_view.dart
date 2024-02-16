@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/transaction_view.dart';
 import 'package:katib_kashi/views/transactions_view.dart';
 import 'package:katib_kashi/views/widgets/custom_slider.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -41,72 +43,109 @@ class _HomeViewState extends State<HomeView> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const CustomSlider(),
-            const SizedBox(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(child: const CustomSlider()),
+          SliverToBoxAdapter(
+            child: const SizedBox(
               height: 20,
             ),
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ActionButton(
-                    icon: Icons.arrow_upward,
-                    label: 'Send',
-                  ),
-                  ActionButton(
-                    icon: Icons.arrow_downward,
-                    label: 'Recive',
-                  ),
-                  ActionButton(
-                    icon: Icons.swap_vert,
-                    label: 'Exchange',
-                  ),
-                  ActionButton(
-                    icon: Icons.more_horiz,
-                    label: 'More',
-                  ),
-                ],
+          ),
+          SliverToBoxAdapter(child: ActionButtons()),
+          SliverToBoxAdapter(child: const SizedBox(height: 16)),
+          SliverToBoxAdapter(child: Section()),
+          Consumer<TransactionViewModel>(
+            builder: (context, model, child) {
+              return SliverList.builder(
+                itemCount: model.allTranasctions.length,
+                itemBuilder: (context, index) {
+                  final transaction = model.allTranasctions[index];
+                  return TransactionWidget(
+                    dateTime: transaction.dateTime,
+                    type: transaction.transactionType,
+                    amount: transaction.moneyAmount,
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Section extends StatelessWidget {
+  const Section({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'Recent Transactions',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: false).push(
+                MaterialPageRoute(
+                  builder: (context) => TransactionsView(),
+                ),
+              );
+            },
+            child: const Text(
+              'View all',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: kSecondary,
               ),
             ),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Recent Transactions',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context, rootNavigator: false).push(
-                        MaterialPageRoute(
-                          builder: (context) => TransactionsView(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'View all',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: kSecondary,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class ActionButtons extends StatelessWidget {
+  const ActionButtons({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ActionButton(
+            icon: Icons.arrow_upward,
+            label: 'Send',
+          ),
+          ActionButton(
+            icon: Icons.arrow_downward,
+            label: 'Recive',
+          ),
+          ActionButton(
+            icon: Icons.swap_vert,
+            label: 'Exchange',
+          ),
+          ActionButton(
+            icon: Icons.more_horiz,
+            label: 'More',
+          ),
+        ],
       ),
     );
   }
