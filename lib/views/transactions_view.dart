@@ -152,7 +152,24 @@ class SendingTransactions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Consumer<TransactionViewModel>(
+      builder: (contex, model, child) {
+        final sendingTransactions = model.allTranasctions
+            .where((tr) => tr.transactionType == TransactionType.send)
+            .toList();
+        return ListView.builder(
+          itemCount: sendingTransactions.length,
+          itemBuilder: (context, index) {
+            final transaction = sendingTransactions[index];
+            return TransactionWidget(
+              dateTime: transaction.dateTime,
+              type: transaction.transactionType,
+              amount: transaction.moneyAmount,
+            );
+          },
+        );
+      },
+    );
   }
 }
 
@@ -161,6 +178,23 @@ class RecivesTransactions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Consumer<TransactionViewModel>(
+      builder: (contex, model, child) {
+        final recivesTransactions = model.allTranasctions
+            .where((tr) => tr.transactionType != TransactionType.send)
+            .toList();
+        return ListView.builder(
+          itemCount: recivesTransactions.length,
+          itemBuilder: (context, index) {
+            final transaction = recivesTransactions[index];
+            return TransactionWidget(
+              dateTime: transaction.dateTime,
+              type: transaction.transactionType,
+              amount: transaction.moneyAmount,
+            );
+          },
+        );
+      },
+    );
   }
 }
