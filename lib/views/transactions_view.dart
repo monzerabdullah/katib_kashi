@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:katib_kashi/models/transaction.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/view_models/transation_view_model.dart';
+import 'package:provider/provider.dart';
 
 class TransactionsView extends StatelessWidget {
   const TransactionsView({super.key});
@@ -75,31 +78,35 @@ class AllTransactions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-        Transaction(),
-      ],
+    return Consumer<TransactionViewModel>(
+      builder: (contex, model, child) {
+        return ListView.builder(
+          itemCount: model.allTranasctions.length,
+          itemBuilder: (context, index) {
+            final transaction = model.allTranasctions[index];
+            return TransactionWidget(
+              dateTime: transaction.dateTime,
+              type: transaction.transactionType,
+              amount: transaction.moneyAmount,
+            );
+          },
+        );
+      },
     );
   }
 }
 
-class Transaction extends StatelessWidget {
-  const Transaction({
+class TransactionWidget extends StatelessWidget {
+  const TransactionWidget({
     super.key,
+    required this.dateTime,
+    required this.amount,
+    required this.type,
   });
 
+  final DateTime dateTime;
+  final int amount;
+  final TransactionType type;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -109,7 +116,9 @@ class Transaction extends StatelessWidget {
         leading: CircleAvatar(
           radius: 32,
           child: Icon(
-            Icons.arrow_outward,
+            type == TransactionType.send
+                ? Icons.arrow_upward
+                : Icons.arrow_downward,
             color: kSecondary,
           ),
           backgroundColor: kGrey,
@@ -121,12 +130,12 @@ class Transaction extends StatelessWidget {
             fontSize: 18.0,
           ),
         ),
-        subtitle: Text('3:45 PM • Feb 22,2024',
+        subtitle: Text(dateTime.toString(),
             style: TextStyle(
               color: Color(0xFFBDBDBD),
             )),
         trailing: Text(
-          '12.00 EGP',
+          '$amount EGP',
           style: TextStyle(
             color: kDark,
             fontSize: 18,

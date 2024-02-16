@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:katib_kashi/models/transaction.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/confirm_transaction_view.dart';
 import 'package:katib_kashi/views/home_view.dart';
 import 'package:katib_kashi/views/sign_up_view.dart';
+import 'package:provider/provider.dart';
 
 class TransactionView extends StatefulWidget {
   const TransactionView({super.key});
@@ -12,20 +15,10 @@ class TransactionView extends StatefulWidget {
 }
 
 class _TransactionViewState extends State<TransactionView> {
-  List<String> buttons = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '',
-    '0',
-    'del'
-  ];
+  TransactionType? transactionType;
+  String? cardNumber;
+  String? amount;
+  String? fees;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +59,9 @@ class _TransactionViewState extends State<TransactionView> {
                 height: 80,
               ),
               TextField(
+                onChanged: (value) {
+                  cardNumber = value;
+                },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
                   filled: true,
@@ -84,21 +80,39 @@ class _TransactionViewState extends State<TransactionView> {
               const SizedBox(
                 height: 30,
               ),
-              const DropdownMenu(
-                menuStyle: MenuStyle(
+              DropdownMenu(
+                onSelected: (value) {
+                  transactionType = value;
+                  debugPrint(transactionType.toString());
+                },
+                label: const Text('Transaction type'),
+                menuStyle: const MenuStyle(
                   backgroundColor: MaterialStatePropertyAll(kGrey),
                   surfaceTintColor: MaterialStatePropertyAll(kGrey),
                 ),
-                dropdownMenuEntries: [
-                  DropdownMenuEntry(value: 'value', label: 'Recived'),
-                  DropdownMenuEntry(value: 'value', label: 'Send'),
-                  DropdownMenuEntry(value: 'value', label: 'Exchange'),
+                dropdownMenuEntries: const [
+                  DropdownMenuEntry(
+                    value: TransactionType.receiveOnly,
+                    label: 'Recieving',
+                  ),
+                  DropdownMenuEntry(
+                    value: TransactionType.receiveAndExchange,
+                    label: 'Exchanging',
+                  ),
+                  DropdownMenuEntry(
+                    value: TransactionType.send,
+                    label: 'Sending',
+                  ),
                 ],
               ),
               const SizedBox(
                 height: 30,
               ),
               TextField(
+                onChanged: (value) {
+                  amount = value;
+                  debugPrint(amount);
+                },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
                   filled: true,
@@ -118,6 +132,10 @@ class _TransactionViewState extends State<TransactionView> {
                 height: 30,
               ),
               TextField(
+                onChanged: (value) {
+                  fees = value;
+                  debugPrint(fees);
+                },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
                   filled: true,
@@ -138,6 +156,16 @@ class _TransactionViewState extends State<TransactionView> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  Provider.of<TransactionViewModel>(context, listen: false)
+                      .addTransaction(
+                    Transaction(
+                      dateTime: DateTime.now(),
+                      transactionType: transactionType!,
+                      cardNumber: int.parse(cardNumber!),
+                      transactionProfit: double.parse(fees!),
+                      moneyAmount: int.parse(amount!),
+                    ),
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -7,7 +7,12 @@ import 'package:katib_kashi/views/transactions_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TransactionViewModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -21,67 +26,64 @@ class _MyAppState extends State<MyApp> {
   int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TransactionViewModel(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Katib Kashi',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: Scaffold(
-          body: views[currentPageIndex],
-          bottomNavigationBar: NavigationBarTheme(
-            data: const NavigationBarThemeData(
-              labelTextStyle: MaterialStatePropertyAll(
-                TextStyle(color: kWhite),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Katib Kashi',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: Scaffold(
+        body: views[currentPageIndex],
+        bottomNavigationBar: NavigationBarTheme(
+          data: const NavigationBarThemeData(
+            labelTextStyle: MaterialStatePropertyAll(
+              TextStyle(color: kWhite),
+            ),
+          ),
+          child: NavigationBar(
+            onDestinationSelected: (int index) {
+              setState(() {
+                currentPageIndex = index;
+              });
+            },
+            backgroundColor: kPrimary,
+            indicatorColor: kIndicatorColor,
+            selectedIndex: currentPageIndex,
+            destinations: const <Widget>[
+              NavigationDestination(
+                selectedIcon: Icon(
+                  Icons.home,
+                  color: kWhite,
+                ),
+                icon: Icon(
+                  Icons.home_outlined,
+                  color: kWhite,
+                ),
+                label: 'Home',
               ),
-            ),
-            child: NavigationBar(
-              onDestinationSelected: (int index) {
-                setState(() {
-                  currentPageIndex = index;
-                });
-              },
-              backgroundColor: kPrimary,
-              indicatorColor: kIndicatorColor,
-              selectedIndex: currentPageIndex,
-              destinations: const <Widget>[
-                NavigationDestination(
-                  selectedIcon: Icon(
-                    Icons.home,
-                    color: kWhite,
-                  ),
-                  icon: Icon(
-                    Icons.home_outlined,
-                    color: kWhite,
-                  ),
-                  label: 'Home',
+              NavigationDestination(
+                icon: Icon(
+                  Icons.list,
+                  color: kWhite,
                 ),
-                NavigationDestination(
-                  icon: Icon(
-                    Icons.list,
-                    color: kWhite,
-                  ),
-                  label: 'Transactions',
+                label: 'Transactions',
+              ),
+              NavigationDestination(
+                icon: Icon(
+                  Icons.credit_card,
+                  color: kWhite,
                 ),
-                NavigationDestination(
-                  icon: Icon(
-                    Icons.credit_card,
-                    color: kWhite,
-                  ),
-                  label: 'Cards',
+                label: 'Cards',
+              ),
+              NavigationDestination(
+                icon: Icon(
+                  Icons.settings,
+                  color: kWhite,
                 ),
-                NavigationDestination(
-                  icon: Icon(
-                    Icons.settings,
-                    color: kWhite,
-                  ),
-                  label: 'Settings',
-                ),
-              ],
-            ),
+                label: 'Settings',
+              ),
+            ],
           ),
         ),
       ),
