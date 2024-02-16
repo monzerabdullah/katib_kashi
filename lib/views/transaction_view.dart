@@ -80,30 +80,38 @@ class _TransactionViewState extends State<TransactionView> {
               const SizedBox(
                 height: 30,
               ),
-              DropdownMenu(
-                onSelected: (value) {
-                  transactionType = value;
-                  debugPrint(transactionType.toString());
-                },
-                label: const Text('Transaction type'),
-                menuStyle: const MenuStyle(
-                  backgroundColor: MaterialStatePropertyAll(kGrey),
-                  surfaceTintColor: MaterialStatePropertyAll(kGrey),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownButton(
+                  onChanged: (value) {
+                    setState(() {
+                      transactionType = value;
+                    });
+                  },
+                  isExpanded: true,
+                  hint: const Text('Transaction Type'),
+                  value: transactionType,
+                  items: const [
+                    DropdownMenuItem(
+                      value: TransactionType.receiveOnly,
+                      child: Text(
+                        'Reciving',
+                      ),
+                    ),
+                    DropdownMenuItem(
+                      value: TransactionType.receiveAndExchange,
+                      child: Text(
+                        'Reciving And Exchange',
+                      ),
+                    ),
+                    DropdownMenuItem(
+                      value: TransactionType.send,
+                      child: Text(
+                        'Sending',
+                      ),
+                    ),
+                  ],
                 ),
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry(
-                    value: TransactionType.receiveOnly,
-                    label: 'Recieving',
-                  ),
-                  DropdownMenuEntry(
-                    value: TransactionType.receiveAndExchange,
-                    label: 'Exchanging',
-                  ),
-                  DropdownMenuEntry(
-                    value: TransactionType.send,
-                    label: 'Sending',
-                  ),
-                ],
               ),
               const SizedBox(
                 height: 30,
@@ -151,11 +159,9 @@ class _TransactionViewState extends State<TransactionView> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 250,
-              ),
+              const Spacer(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   Provider.of<TransactionViewModel>(context, listen: false)
                       .addTransaction(
                     Transaction(
@@ -169,7 +175,7 @@ class _TransactionViewState extends State<TransactionView> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ConfirmTransactionView(),
+                      builder: (context) => const ConfirmTransactionView(),
                     ),
                   );
                 },
@@ -188,7 +194,8 @@ class _TransactionViewState extends State<TransactionView> {
                     color: kWhite,
                   ),
                 ),
-              )
+              ),
+              const SizedBox(height: 15),
             ],
           ),
         ),
