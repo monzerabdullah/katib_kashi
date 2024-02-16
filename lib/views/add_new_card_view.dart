@@ -1,10 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:katib_kashi/utils/constants.dart';
-import 'package:katib_kashi/views/home_view.dart';
+import 'dart:ffi';
 
-class NewCardView extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:katib_kashi/models/card.dart';
+import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/view_models/cards_view_model.dart';
+import 'package:katib_kashi/views/home_view.dart';
+import 'package:provider/provider.dart';
+
+class NewCardView extends StatefulWidget {
   const NewCardView({super.key});
+
+  @override
+  State<NewCardView> createState() => _NewCardViewState();
+}
+
+class _NewCardViewState extends State<NewCardView> {
   //it should be a ShowModel
+  CardType? cardType;
+  String? fullName;
+  String? cardNumber;
+  String? currentBalance;
+  String? phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,24 +66,61 @@ class NewCardView extends StatelessWidget {
                   child: Column(
                     children: [
                       const SizedBox(height: 25),
-                      TextField(
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          filled: true,
-                          fillColor: kGrey,
-                          hintText: 'Card Type',
-                          hintStyle: const TextStyle(
-                            color: kSecondaryText,
-                            fontSize: 16.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                      // TextField(
+                      //   onChanged: (value) {},
+                      //   decoration: InputDecoration(
+                      //     contentPadding: const EdgeInsets.all(20),
+                      //     filled: true,
+                      //     fillColor: kGrey,
+                      //     hintText: 'Card Type',
+                      //     hintStyle: const TextStyle(
+                      //       color: kSecondaryText,
+                      //       fontSize: 16.0,
+                      //     ),
+                      //     border: OutlineInputBorder(
+                      //       borderSide: BorderSide.none,
+                      //       borderRadius: BorderRadius.circular(20),
+                      //     ),
+                      //   ),
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          onChanged: (value) {
+                            setState(() {
+                              cardType = value;
+                            });
+                          },
+                          isExpanded: true,
+                          hint: const Text('Transaction Type'),
+                          value: cardType,
+                          items: const [
+                            DropdownMenuItem(
+                              value: CardType.bank,
+                              child: Text(
+                                'Banking',
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: CardType.etislate,
+                              child: Text(
+                                'Etisalat',
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: CardType.vodaPhone,
+                              child: Text(
+                                'Voda',
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 20),
                       TextField(
+                        onChanged: (value) {
+                          fullName = value;
+                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
                           filled: true,
@@ -87,6 +140,9 @@ class NewCardView extends StatelessWidget {
                         height: 20,
                       ),
                       TextField(
+                        onChanged: (value) {
+                          cardNumber = value;
+                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
                           filled: true,
@@ -106,6 +162,9 @@ class NewCardView extends StatelessWidget {
                         height: 20,
                       ),
                       TextField(
+                        onChanged: (value) {
+                          currentBalance = value;
+                        },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
                           filled: true,
@@ -125,6 +184,9 @@ class NewCardView extends StatelessWidget {
                         height: 20,
                       ),
                       TextField(
+                        onChanged: (value) {
+                          phoneNumber = value;
+                        },
                         obscureText: true,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
@@ -144,12 +206,15 @@ class NewCardView extends StatelessWidget {
                       const SizedBox(height: 35),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const HomeView(),
+                          Provider.of<CardsViewModel>(context, listen: false)
+                              .addNewCard(
+                            CardModel(
+                              cardOwnerName: fullName!,
+                              cardCurrentBalance: double.parse(currentBalance!),
+                              cardNumber: int.parse(cardNumber!),
                             ),
                           );
+                          Navigator.of(context).pop();
                         },
                         child: Container(
                           height: 62,

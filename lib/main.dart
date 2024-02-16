@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/view_models/cards_view_model.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/cards_view.dart';
 import 'package:katib_kashi/views/home_view.dart';
@@ -8,8 +9,11 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => TransactionViewModel(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TransactionViewModel()),
+        ChangeNotifierProvider(create: (context) => CardsViewModel())
+      ],
       child: const MyApp(),
     ),
   );
