@@ -3,6 +3,7 @@ import 'package:katib_kashi/main.dart';
 import 'package:katib_kashi/models/transaction.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
+import 'package:katib_kashi/views/transaction_details_view.dart';
 import 'package:provider/provider.dart';
 
 class TransactionsView extends StatelessWidget {
@@ -115,7 +116,17 @@ class TransactionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => TransactionDetailsView(
+              dateTime: dateTime,
+              amount: amount,
+              type: type,
+            ),
+          ),
+        );
+      },
       child: ListTile(
         contentPadding: EdgeInsets.all(10),
         leading: CircleAvatar(
