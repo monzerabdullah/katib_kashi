@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 
 // List<CardModel> cardsList = [];
 
+int? selectedCardNumber;
+
 // List<Widget> cardsSlider = cardsList
 //     .map(
 //       (card) => Container(
@@ -85,6 +87,8 @@ class _CustomSliderState extends State<CustomSlider> {
 
   @override
   Widget build(BuildContext context) {
+    selectedCardNumber =
+        Provider.of<CardsViewModel>(context).getCardNumber(_current);
     return Column(
       children: [
         const SizedBox(height: 50),
@@ -161,8 +165,12 @@ class _CustomSliderState extends State<CustomSlider> {
                   enlargeCenterPage: true,
                   aspectRatio: 2.0,
                   onPageChanged: (index, reason) {
+                    selectedCardNumber = model.getCardNumber(index);
                     setState(() {
                       _current = index;
+
+                      debugPrint(
+                          'when it selected from the slider $selectedCardNumber');
                     });
                   }),
             );

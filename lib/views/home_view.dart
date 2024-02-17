@@ -103,6 +103,7 @@ class _HomeViewState extends State<HomeView> {
                     dateTime: transaction.dateTime,
                     type: transaction.transactionType,
                     amount: transaction.moneyAmount,
+                    cardNumber: transaction.cardNumber,
                   );
                 },
               );
@@ -218,11 +219,13 @@ class ActionButton extends StatelessWidget {
               backgroundColor: MaterialStatePropertyAll(kGrey),
             ),
             onPressed: () {
+              // debugPrint('$selectedCardNumber');
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => TransactionView(
                     selectedTransaction: transactionType,
+                    selectedCardNumber: selectedCardNumber,
                   ),
                 ),
               );

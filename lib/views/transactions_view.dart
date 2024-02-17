@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:katib_kashi/main.dart';
 import 'package:katib_kashi/models/transaction.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/view_models/cards_view_model.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/transaction_details_view.dart';
 import 'package:provider/provider.dart';
@@ -94,6 +95,7 @@ class AllTransactions extends StatelessWidget {
               dateTime: transaction.dateTime,
               type: transaction.transactionType,
               amount: transaction.moneyAmount,
+              cardNumber: transaction.cardNumber,
             );
           },
         );
@@ -108,11 +110,13 @@ class TransactionWidget extends StatelessWidget {
     required this.dateTime,
     required this.amount,
     required this.type,
+    required this.cardNumber,
   });
 
   final DateTime dateTime;
   final int amount;
   final TransactionType type;
+  final int cardNumber;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -140,7 +144,10 @@ class TransactionWidget extends StatelessWidget {
           backgroundColor: kGrey,
         ),
         title: Text(
-          'Monzer Abdullah',
+          Provider.of<CardsViewModel>(context)
+              .allCards
+              .singleWhere((card) => card.cardNumber == cardNumber)
+              .cardOwnerName,
           style: TextStyle(
             color: kDark,
             fontSize: 18.0,
@@ -184,6 +191,7 @@ class SendingTransactions extends StatelessWidget {
               dateTime: transaction.dateTime,
               type: transaction.transactionType,
               amount: transaction.moneyAmount,
+              cardNumber: transaction.cardNumber,
             );
           },
         );
@@ -210,6 +218,7 @@ class RecivesTransactions extends StatelessWidget {
               dateTime: transaction.dateTime,
               type: transaction.transactionType,
               amount: transaction.moneyAmount,
+              cardNumber: transaction.cardNumber,
             );
           },
         );
