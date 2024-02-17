@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:katib_kashi/models/transaction.dart';
 import 'package:katib_kashi/utils/constants.dart';
+import 'package:katib_kashi/view_models/cards_view_model.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/transaction_view.dart';
 import 'package:katib_kashi/views/transactions_view.dart';
@@ -46,8 +47,45 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(child: const CustomSlider()),
-          SliverToBoxAdapter(
+          Provider.of<CardsViewModel>(context).allCards.isEmpty
+              ? SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        margin: EdgeInsets.all(5),
+                        width: 800,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: const LinearGradient(
+                            colors: [
+                              kSecondary,
+                              kPrimary,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'No Cards Created Yet, Go To Cards Please',
+                          style: TextStyle(
+                            color: kWhite,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : const SliverToBoxAdapter(
+                  child: const CustomSlider(),
+                ),
+          const SliverToBoxAdapter(
             child: const SizedBox(
               height: 20,
             ),
