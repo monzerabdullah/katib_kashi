@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:katib_kashi/models/transaction.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/transaction_view.dart';
@@ -132,18 +133,22 @@ class ActionButtons extends StatelessWidget {
           ActionButton(
             icon: Icons.arrow_upward,
             label: 'Send',
+            transactionType: TransactionType.send,
           ),
           ActionButton(
             icon: Icons.arrow_downward,
             label: 'Recive',
+            transactionType: TransactionType.receiveOnly,
           ),
           ActionButton(
             icon: Icons.swap_vert,
             label: 'Exchange',
+            transactionType: TransactionType.receiveAndExchange,
           ),
           ActionButton(
             icon: Icons.more_horiz,
             label: 'More',
+            transactionType: TransactionType.send,
           ),
         ],
       ),
@@ -156,9 +161,11 @@ class ActionButton extends StatelessWidget {
     super.key,
     required this.icon,
     required this.label,
+    required this.transactionType,
   });
   final IconData icon;
   final String label;
+  final TransactionType transactionType;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -176,7 +183,9 @@ class ActionButton extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => TransactionView(),
+                  builder: (context) => TransactionView(
+                    selectedTransaction: transactionType,
+                  ),
                 ),
               );
             },

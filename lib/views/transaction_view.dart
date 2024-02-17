@@ -8,7 +8,8 @@ import 'package:katib_kashi/views/sign_up_view.dart';
 import 'package:provider/provider.dart';
 
 class TransactionView extends StatefulWidget {
-  const TransactionView({super.key});
+  TransactionView({super.key, this.selectedTransaction});
+  TransactionType? selectedTransaction;
 
   @override
   State<TransactionView> createState() => _TransactionViewState();
@@ -20,13 +21,22 @@ class _TransactionViewState extends State<TransactionView> {
   String? amount;
   String? fees;
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    transactionType = widget.selectedTransaction;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(
-            Icons.menu,
+            Icons.arrow_back,
             color: kPrimary,
           ),
         ),
