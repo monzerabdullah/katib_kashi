@@ -92,7 +92,7 @@ class _NewCardViewState extends State<NewCardView> {
                             });
                           },
                           isExpanded: true,
-                          hint: const Text('Transaction Type'),
+                          hint: const Text('Card Type'),
                           value: cardType,
                           items: const [
                             DropdownMenuItem(
