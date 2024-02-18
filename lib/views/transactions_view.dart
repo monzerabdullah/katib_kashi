@@ -70,7 +70,11 @@ class TransactionsView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: kSecondary,
           foregroundColor: kWhite,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => Statistics(),
+            ));
+          },
           child: const Icon(
             Icons.show_chart,
           ),
@@ -223,6 +227,94 @@ class RecivesTransactions extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class Statistics extends StatelessWidget {
+  const Statistics({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    child: Icon(
+                      Icons.insert_chart_rounded,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Income'),
+                      SizedBox(height: 5),
+                      Text(
+                        '${Provider.of<TransactionViewModel>(context).income()}',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    child: Icon(
+                      Icons.insert_chart_rounded,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Sent'),
+                      SizedBox(height: 5),
+                      Text(
+                        '${Provider.of<TransactionViewModel>(context).sent()}',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 30,
+                    child: Icon(
+                      Icons.insert_chart_rounded,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Recived'),
+                      SizedBox(height: 5),
+                      Text(
+                        '${Provider.of<TransactionViewModel>(context).recived()}',
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
