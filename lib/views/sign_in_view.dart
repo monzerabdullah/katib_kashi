@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:katib_kashi/main.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/views/home_view.dart';
 import 'package:katib_kashi/views/sign_up_view.dart';
@@ -43,15 +44,14 @@ class SignInView extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 50,
               ),
-              const SizedBox(height: 25),
               TextField(
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
                   filled: true,
                   fillColor: kGrey,
-                  hintText: 'Full Name',
+                  hintText: 'Email Address',
                   hintStyle: const TextStyle(
                     color: kSecondaryText,
                     fontSize: 16.0,
@@ -63,7 +63,7 @@ class SignInView extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 25,
               ),
               TextField(
                 obscureText: true,
@@ -107,7 +107,7 @@ class SignInView extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const HomeView(),
+                      builder: (_) => const MyApp(),
                     ),
                   );
                 },
@@ -119,7 +119,7 @@ class SignInView extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'SIGN UP',
+                  'SIGN IN',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
@@ -135,7 +135,6 @@ class SignInView extends StatelessWidget {
                     'You Don\'t have an Account? ',
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.w600,
                       color: kDark,
                     ),
                   ),
@@ -159,6 +158,7 @@ class SignInView extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 25),
             ],
           ),
         ),

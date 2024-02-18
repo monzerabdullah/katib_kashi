@@ -4,6 +4,8 @@ import 'package:katib_kashi/view_models/cards_view_model.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/cards_view.dart';
 import 'package:katib_kashi/views/home_view.dart';
+import 'package:katib_kashi/views/sign_in_view.dart';
+import 'package:katib_kashi/views/sign_up_view.dart';
 import 'package:katib_kashi/views/transactions_view.dart';
 import 'package:provider/provider.dart';
 
