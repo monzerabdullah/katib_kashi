@@ -123,6 +123,7 @@ class _TransactionViewState extends State<TransactionView> {
                         });
                       },
                       isExpanded: true,
+                      dropdownColor: kWhite,
                       decoration: const InputDecoration(
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: kSecondary),

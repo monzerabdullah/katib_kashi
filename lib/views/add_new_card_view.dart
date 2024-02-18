@@ -67,13 +67,25 @@ class _NewCardViewState extends State<NewCardView> {
                       const SizedBox(height: 25),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: DropdownButton(
+                        child: DropdownButtonFormField(
                           onChanged: (value) {
                             setState(() {
                               cardType = value;
                             });
                           },
                           isExpanded: true,
+                          dropdownColor: kWhite,
+                          decoration: const InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: kSecondary),
+                            ),
+                            prefixIcon: Icon(Icons.credit_card_rounded),
+                            prefixIconColor: kSecondary,
+                          ),
+                          icon: Icon(
+                            Icons.arrow_drop_down_circle,
+                            color: kSecondary,
+                          ),
                           hint: const Text('Card Type'),
                           value: cardType,
                           items: const [
