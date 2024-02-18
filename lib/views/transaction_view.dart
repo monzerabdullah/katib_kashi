@@ -25,8 +25,8 @@ class TransactionView extends StatefulWidget {
 class _TransactionViewState extends State<TransactionView> {
   TransactionType? transactionType;
   int? cardNumber;
-  String? amount;
-  String? fees;
+  double? amount;
+  double? fees;
   @override
   void initState() {
     // TODO: implement initState
@@ -172,8 +172,7 @@ class _TransactionViewState extends State<TransactionView> {
               ),
               TextField(
                 onChanged: (value) {
-                  amount = value;
-                  debugPrint(amount);
+                  amount = double.parse(value);
                 },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
@@ -195,8 +194,7 @@ class _TransactionViewState extends State<TransactionView> {
               ),
               TextField(
                 onChanged: (value) {
-                  fees = value;
-                  debugPrint(fees);
+                  fees = double.parse(value);
                 },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
@@ -223,8 +221,8 @@ class _TransactionViewState extends State<TransactionView> {
                       dateTime: DateTime.now(),
                       transactionType: transactionType!,
                       cardNumber: cardNumber!,
-                      transactionProfit: double.parse(fees!),
-                      moneyAmount: int.parse(amount!),
+                      transactionProfit: fees!,
+                      moneyAmount: amount!.toInt(),
                     ),
                   );
                   Navigator.push(
