@@ -1,9 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:katib_kashi/models/card.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/view_models/cards_view_model.dart';
+import 'package:katib_kashi/views/confirm_transaction_view.dart';
 import 'package:katib_kashi/views/home_view.dart';
 import 'package:provider/provider.dart';
 
@@ -32,12 +31,12 @@ class _NewCardViewState extends State<NewCardView> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: kWhite,
           ),
         ),
-        title: Text(
+        title: const Text(
           'Add New Card',
           style: TextStyle(color: kWhite),
         ),
@@ -66,23 +65,6 @@ class _NewCardViewState extends State<NewCardView> {
                   child: Column(
                     children: [
                       const SizedBox(height: 25),
-                      // TextField(
-                      //   onChanged: (value) {},
-                      //   decoration: InputDecoration(
-                      //     contentPadding: const EdgeInsets.all(20),
-                      //     filled: true,
-                      //     fillColor: kGrey,
-                      //     hintText: 'Card Type',
-                      //     hintStyle: const TextStyle(
-                      //       color: kSecondaryText,
-                      //       fontSize: 16.0,
-                      //     ),
-                      //     border: OutlineInputBorder(
-                      //       borderSide: BorderSide.none,
-                      //       borderRadius: BorderRadius.circular(20),
-                      //     ),
-                      //   ),
-                      // ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: DropdownButton(
@@ -116,7 +98,7 @@ class _NewCardViewState extends State<NewCardView> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 25),
                       TextField(
                         onChanged: (value) {
                           fullName = value;
@@ -136,9 +118,7 @@ class _NewCardViewState extends State<NewCardView> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 25),
                       TextField(
                         onChanged: (value) {
                           cardNumber = int.parse(value);
@@ -159,7 +139,7 @@ class _NewCardViewState extends State<NewCardView> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 25,
                       ),
                       TextField(
                         onChanged: (value) {
@@ -181,7 +161,7 @@ class _NewCardViewState extends State<NewCardView> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 25,
                       ),
                       TextField(
                         onChanged: (value) {
@@ -204,8 +184,8 @@ class _NewCardViewState extends State<NewCardView> {
                         ),
                       ),
                       const SizedBox(height: 35),
-                      GestureDetector(
-                        onTap: () {
+                      ElevatedButton(
+                        onPressed: () {
                           Provider.of<CardsViewModel>(context, listen: false)
                               .addNewCard(
                             CardModel(
@@ -214,23 +194,27 @@ class _NewCardViewState extends State<NewCardView> {
                               cardNumber: cardNumber!,
                             ),
                           );
-                          Navigator.of(context).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ConfirmTransactionView(),
+                            ),
+                          );
                         },
-                        child: Container(
-                          height: 62,
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: kSecondary,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: kSecondary,
+                          minimumSize: const Size.fromHeight(64),
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          child: const Text(
-                            'Add',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              color: kWhite,
-                            ),
+                        ),
+                        child: const Text(
+                          'Add',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            color: kWhite,
                           ),
                         ),
                       ),
