@@ -210,6 +210,12 @@ class _TransactionViewState extends State<TransactionView> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: kSecondary,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(
@@ -231,6 +237,12 @@ class _TransactionViewState extends State<TransactionView> {
                   focusColor: kSecondary,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: kSecondary,
+                    ),
                   ),
                 ),
               ),

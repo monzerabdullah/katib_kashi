@@ -116,6 +116,12 @@ class _NewCardViewState extends State<NewCardView> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(20),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(
+                              color: kSecondary,
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 25),
@@ -135,6 +141,12 @@ class _NewCardViewState extends State<NewCardView> {
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(
+                              color: kSecondary,
+                            ),
                           ),
                         ),
                       ),
@@ -158,6 +170,12 @@ class _NewCardViewState extends State<NewCardView> {
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(20),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(
+                              color: kSecondary,
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -180,6 +198,12 @@ class _NewCardViewState extends State<NewCardView> {
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(20),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: const BorderSide(
+                              color: kSecondary,
+                            ),
                           ),
                         ),
                       ),
