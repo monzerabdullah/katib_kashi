@@ -18,9 +18,9 @@ class _NewCardViewState extends State<NewCardView> {
   //it should be a ShowModel
   CardType? cardType;
   String? fullName;
-  String? cardNumber;
-  String? currentBalance;
-  String? phoneNumber;
+  int? cardNumber;
+  int? currentBalance;
+  int? phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,7 +141,7 @@ class _NewCardViewState extends State<NewCardView> {
                       ),
                       TextField(
                         onChanged: (value) {
-                          cardNumber = value;
+                          cardNumber = int.parse(value);
                         },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
@@ -163,7 +163,7 @@ class _NewCardViewState extends State<NewCardView> {
                       ),
                       TextField(
                         onChanged: (value) {
-                          currentBalance = value;
+                          currentBalance = int.parse(value);
                         },
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(20),
@@ -185,7 +185,7 @@ class _NewCardViewState extends State<NewCardView> {
                       ),
                       TextField(
                         onChanged: (value) {
-                          phoneNumber = value;
+                          phoneNumber = int.parse(value);
                         },
                         obscureText: true,
                         decoration: InputDecoration(
@@ -210,8 +210,8 @@ class _NewCardViewState extends State<NewCardView> {
                               .addNewCard(
                             CardModel(
                               cardOwnerName: fullName!,
-                              cardCurrentBalance: double.parse(currentBalance!),
-                              cardNumber: int.parse(cardNumber!),
+                              cardCurrentBalance: currentBalance!.toDouble(),
+                              cardNumber: cardNumber!,
                             ),
                           );
                           Navigator.of(context).pop();
