@@ -108,7 +108,11 @@ class _TransactionViewState extends State<TransactionView> {
                 padding: const EdgeInsets.all(8.0),
                 child: Consumer<CardsViewModel>(
                   builder: (context, model, child) {
-                    return DropdownButton(
+                    return DropdownButtonFormField(
+                      icon: const Icon(
+                        Icons.arrow_drop_down_circle,
+                        color: kSecondary,
+                      ),
                       value: model.allCards
                           .singleWhere((card) => card.cardNumber == cardNumber)
                           .cardNumber,
@@ -119,6 +123,13 @@ class _TransactionViewState extends State<TransactionView> {
                         });
                       },
                       isExpanded: true,
+                      decoration: const InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: kSecondary),
+                        ),
+                        prefixIcon: Icon(Icons.credit_card_rounded),
+                        prefixIconColor: kSecondary,
+                      ),
                       hint: Text(
                           '${model.allCards.singleWhere((card) => card.cardNumber == cardNumber).cardOwnerName}'),
                       items: model.allCards.map((card) {
@@ -136,7 +147,19 @@ class _TransactionViewState extends State<TransactionView> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: DropdownButton(
+                child: DropdownButtonFormField(
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: kSecondary,
+                  ),
+                  dropdownColor: kWhite,
+                  decoration: const InputDecoration(
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: kSecondary),
+                    ),
+                    prefixIcon: Icon(Icons.library_books),
+                    prefixIconColor: kSecondary,
+                  ),
                   onChanged: (value) {
                     setState(() {
                       transactionType = value;
