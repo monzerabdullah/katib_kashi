@@ -11,59 +11,60 @@ class StatisticsView extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: kWhite,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: kPrimary,
-              ),
-            ),
-            title: const Text(
-              'Statistics',
-              style: TextStyle(
-                color: kPrimary,
-              ),
-            ),
-            centerTitle: true,
-            actions: const [
-              CircleAvatar(
-                radius: 25,
-                backgroundImage: AssetImage('assets/images/user_avatar.jpg'),
-              ),
-              SizedBox(
-                width: 15,
-              )
-            ],
-            bottom: const TabBar(
-              indicatorColor: kSecondary,
-              indicatorWeight: 3,
-              unselectedLabelColor: kDark,
-              labelColor: kSecondary,
-              labelStyle: TextStyle(
-                fontSize: 16,
-                color: kGrey,
-                fontWeight: FontWeight.w600,
-              ),
-              tabs: [
-                Tab(text: 'Day'),
-                Tab(text: 'Week'),
-                Tab(text: 'Month'),
-                Tab(text: 'Year'),
-              ],
+        appBar: AppBar(
+          backgroundColor: kWhite,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: kPrimary,
             ),
           ),
-          body: TabBarView(
-            children: [
-              StatisticsRow(),
-              StatisticsRow(),
-              StatisticsRow(),
-              StatisticsRow(),
+          title: const Text(
+            'Statistics',
+            style: TextStyle(
+              color: kPrimary,
+            ),
+          ),
+          centerTitle: true,
+          actions: const [
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage('assets/images/user_avatar.jpg'),
+            ),
+            SizedBox(
+              width: 15,
+            )
+          ],
+          bottom: const TabBar(
+            indicatorColor: kSecondary,
+            indicatorWeight: 3,
+            unselectedLabelColor: kDark,
+            labelColor: kSecondary,
+            labelStyle: TextStyle(
+              fontSize: 16,
+              color: kGrey,
+              fontWeight: FontWeight.w600,
+            ),
+            tabs: [
+              Tab(text: 'Day'),
+              Tab(text: 'Week'),
+              Tab(text: 'Month'),
+              Tab(text: 'Year'),
             ],
-          )),
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            StatisticsRow(),
+            StatisticsRow(),
+            StatisticsRow(),
+            StatisticsRow(),
+          ],
+        ),
+      ),
     );
   }
 }
