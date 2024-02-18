@@ -237,6 +237,34 @@ class Statistics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kWhite,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: kPrimary,
+          ),
+        ),
+        title: const Text(
+          'Statistics',
+          style: TextStyle(
+            color: kPrimary,
+          ),
+        ),
+        centerTitle: true,
+        actions: const [
+          CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage('assets/images/user_avatar.jpg'),
+          ),
+          SizedBox(
+            width: 15,
+          )
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: Row(
