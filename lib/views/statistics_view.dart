@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class StatisticsView extends StatelessWidget {
@@ -58,13 +59,125 @@ class StatisticsView extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            StatisticsRow(),
-            StatisticsRow(),
-            StatisticsRow(),
-            StatisticsRow(),
+            DayStatistics(),
+            DayStatistics(),
+            DayStatistics(),
+            DayStatistics(),
           ],
         ),
       ),
+    );
+  }
+}
+
+class DayStatistics extends StatelessWidget {
+  const DayStatistics({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StatisticalData(
+                  progressColor: Color(0xFF00E194),
+                  icon: Icons.arrow_drop_down,
+                  label: 'Income',
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                StatisticalData(
+                  progressColor: Color(0xFFFF4891),
+                  icon: Icons.arrow_drop_up,
+                  label: 'Sent',
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                StatisticalData(
+                  progressColor: kSecondary,
+                  icon: Icons.arrow_drop_down,
+                  label: 'Recived',
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StatisticalData extends StatelessWidget {
+  const StatisticalData({
+    super.key,
+    required this.progressColor,
+    required this.icon,
+    required this.label,
+  });
+
+  final Color progressColor;
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    double? percentage;
+
+    percentage = (Provider.of<TransactionViewModel>(context).sent() +
+            Provider.of<TransactionViewModel>(context).recived()) /
+        Provider.of<TransactionViewModel>(context).income() /
+        10;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CircularPercentIndicator(
+          animation: true,
+          radius: 40,
+          progressColor: progressColor,
+          backgroundColor: const Color(0xFFDAE1F6),
+          center: Icon(
+            icon,
+            color: progressColor,
+            size: 35,
+          ),
+          percent: percentage!,
+        ),
+        const SizedBox(width: 20),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[500],
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              '${Provider.of<TransactionViewModel>(context).income()}',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
