@@ -198,6 +198,7 @@ class _TransactionViewState extends State<TransactionView> {
                 onChanged: (value) {
                   amount = double.parse(value);
                 },
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),
                   filled: true,
@@ -223,6 +224,7 @@ class _TransactionViewState extends State<TransactionView> {
                 height: 30,
               ),
               TextField(
+                keyboardType: TextInputType.number,
                 onChanged: (value) {
                   fees = double.parse(value);
                 },

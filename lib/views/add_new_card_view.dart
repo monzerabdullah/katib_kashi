@@ -23,7 +23,7 @@ class _NewCardViewState extends State<NewCardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimary,
+      backgroundColor: kWhite,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: kPrimary,
@@ -45,221 +45,208 @@ class _NewCardViewState extends State<NewCardView> {
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height + 150,
-          child: Column(
-            children: [
-              const SizedBox(
-                width: double.infinity,
-                height: 200,
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: kWhite,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 80,
+                ),
+                const SizedBox(height: 25),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButtonFormField(
+                    onChanged: (value) {
+                      setState(() {
+                        cardType = value;
+                      });
+                    },
+                    isExpanded: true,
+                    dropdownColor: kWhite,
+                    decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: kSecondary),
+                      ),
+                      prefixIcon: Icon(Icons.credit_card_rounded),
+                      prefixIconColor: kSecondary,
                     ),
-                  ),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 25),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: DropdownButtonFormField(
-                          onChanged: (value) {
-                            setState(() {
-                              cardType = value;
-                            });
-                          },
-                          isExpanded: true,
-                          dropdownColor: kWhite,
-                          decoration: const InputDecoration(
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: kSecondary),
-                            ),
-                            prefixIcon: Icon(Icons.credit_card_rounded),
-                            prefixIconColor: kSecondary,
-                          ),
-                          icon: Icon(
-                            Icons.arrow_drop_down_circle,
-                            color: kSecondary,
-                          ),
-                          hint: const Text('Card Type'),
-                          value: cardType,
-                          items: const [
-                            DropdownMenuItem(
-                              value: CardType.bank,
-                              child: Text(
-                                'Banking',
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: CardType.etislate,
-                              child: Text(
-                                'Etisalat',
-                              ),
-                            ),
-                            DropdownMenuItem(
-                              value: CardType.vodaPhone,
-                              child: Text(
-                                'Voda',
-                              ),
-                            ),
-                          ],
+                    icon: const Icon(
+                      Icons.arrow_drop_down_circle,
+                      color: kSecondary,
+                    ),
+                    hint: const Text('Card Type'),
+                    value: cardType,
+                    items: const [
+                      DropdownMenuItem(
+                        value: CardType.bank,
+                        child: Text(
+                          'Banking',
                         ),
                       ),
-                      const SizedBox(height: 25),
-                      TextField(
-                        onChanged: (value) {
-                          fullName = value;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          filled: true,
-                          fillColor: kGrey,
-                          hintText: 'Full Name',
-                          hintStyle: const TextStyle(
-                            color: kSecondaryText,
-                            fontSize: 16.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: const BorderSide(
-                              color: kSecondary,
-                            ),
-                          ),
+                      DropdownMenuItem(
+                        value: CardType.etislate,
+                        child: Text(
+                          'Etisalat',
                         ),
                       ),
-                      const SizedBox(height: 25),
-                      TextField(
-                        onChanged: (value) {
-                          cardNumber = int.parse(value);
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          filled: true,
-                          fillColor: kGrey,
-                          hintText: 'Card Number',
-                          hintStyle: const TextStyle(
-                            color: kSecondaryText,
-                            fontSize: 16.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: const BorderSide(
-                              color: kSecondary,
-                            ),
-                          ),
+                      DropdownMenuItem(
+                        value: CardType.vodaPhone,
+                        child: Text(
+                          'Voda',
                         ),
                       ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      TextField(
-                        onChanged: (value) {
-                          currentBalance = int.parse(value);
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          filled: true,
-                          fillColor: kGrey,
-                          hintText: 'Current Balance',
-                          hintStyle: const TextStyle(
-                            color: kSecondaryText,
-                            fontSize: 16.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: const BorderSide(
-                              color: kSecondary,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      TextField(
-                        onChanged: (value) {
-                          phoneNumber = int.parse(value);
-                        },
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(20),
-                          filled: true,
-                          fillColor: kGrey,
-                          hintText: 'Phone Number',
-                          hintStyle: const TextStyle(
-                            color: kSecondaryText,
-                            fontSize: 16.0,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: const BorderSide(
-                              color: kSecondary,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 35),
-                      ElevatedButton(
-                        onPressed: () {
-                          Provider.of<CardsViewModel>(context, listen: false)
-                              .addNewCard(
-                            CardModel(
-                              cardOwnerName: fullName!,
-                              cardCurrentBalance: currentBalance!.toDouble(),
-                              cardNumber: cardNumber!,
-                            ),
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ConfirmTransactionView(),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: kSecondary,
-                          minimumSize: const Size.fromHeight(64),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                        ),
-                        child: const Text(
-                          'Add',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: kWhite,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 25),
                     ],
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 25),
+                TextField(
+                  onChanged: (value) {
+                    fullName = value;
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(20),
+                    filled: true,
+                    fillColor: kGrey,
+                    hintText: 'Full Name',
+                    hintStyle: const TextStyle(
+                      color: kSecondaryText,
+                      fontSize: 16.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                        color: kSecondary,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 25),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    cardNumber = int.parse(value);
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(20),
+                    filled: true,
+                    fillColor: kGrey,
+                    hintText: 'Card Number',
+                    hintStyle: const TextStyle(
+                      color: kSecondaryText,
+                      fontSize: 16.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                        color: kSecondary,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    currentBalance = int.parse(value);
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(20),
+                    filled: true,
+                    fillColor: kGrey,
+                    hintText: 'Current Balance',
+                    hintStyle: const TextStyle(
+                      color: kSecondaryText,
+                      fontSize: 16.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                        color: kSecondary,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                TextField(
+                  keyboardType: TextInputType.phone,
+                  onChanged: (value) {
+                    phoneNumber = int.parse(value);
+                  },
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(20),
+                    filled: true,
+                    fillColor: kGrey,
+                    hintText: 'Phone Number',
+                    hintStyle: const TextStyle(
+                      color: kSecondaryText,
+                      fontSize: 16.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                        color: kSecondary,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 35),
+                ElevatedButton(
+                  onPressed: () {
+                    Provider.of<CardsViewModel>(context, listen: false)
+                        .addNewCard(
+                      CardModel(
+                        cardOwnerName: fullName ?? '',
+                        cardCurrentBalance: currentBalance!.toDouble() ?? 0.0,
+                        cardNumber: cardNumber ?? 0,
+                      ),
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ConfirmTransactionView(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: kSecondary,
+                    minimumSize: const Size.fromHeight(64),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    'Add',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                      color: kWhite,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 25),
+              ],
+            ),
           ),
         ),
       ),
