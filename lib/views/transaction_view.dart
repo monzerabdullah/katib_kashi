@@ -36,12 +36,6 @@ class _TransactionViewState extends State<TransactionView> {
   }
 
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     // cardNumber = widget.selectedCardNumber;
     debugPrint('card number value at first time widget is created $cardNumber');
@@ -196,7 +190,7 @@ class _TransactionViewState extends State<TransactionView> {
               ),
               TextField(
                 onChanged: (value) {
-                  amount = double.parse(value);
+                  amount = double.tryParse(value);
                 },
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -226,7 +220,7 @@ class _TransactionViewState extends State<TransactionView> {
               TextField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  fees = double.parse(value);
+                  fees = double.tryParse(value);
                 },
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.all(20),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:katib_kashi/models/card.dart';
 import 'package:katib_kashi/utils/constants.dart';
 import 'package:katib_kashi/view_models/cards_view_model.dart';
@@ -127,8 +128,11 @@ class _NewCardViewState extends State<NewCardView> {
                 const SizedBox(height: 25),
                 TextField(
                   keyboardType: TextInputType.number,
+                  // inputFormatters: [
+                  //   FilteringTextInputFormatter.digitsOnly,
+                  // ],
                   onChanged: (value) {
-                    cardNumber = int.parse(value);
+                    cardNumber = int.tryParse(value);
                   },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(20),
@@ -157,7 +161,7 @@ class _NewCardViewState extends State<NewCardView> {
                 TextField(
                   keyboardType: TextInputType.number,
                   onChanged: (value) {
-                    currentBalance = int.parse(value);
+                    currentBalance = int.tryParse(value);
                   },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(20),
@@ -186,7 +190,7 @@ class _NewCardViewState extends State<NewCardView> {
                 TextField(
                   keyboardType: TextInputType.phone,
                   onChanged: (value) {
-                    phoneNumber = int.parse(value);
+                    phoneNumber = int.tryParse(value);
                   },
                   obscureText: true,
                   decoration: InputDecoration(
@@ -216,9 +220,10 @@ class _NewCardViewState extends State<NewCardView> {
                     Provider.of<CardsViewModel>(context, listen: false)
                         .addNewCard(
                       CardModel(
-                        cardOwnerName: fullName ?? '',
-                        cardCurrentBalance: currentBalance!.toDouble() ?? 0.0,
-                        cardNumber: cardNumber ?? 0,
+                        cardOwnerName: fullName!,
+                        cardCurrentBalance: currentBalance!.toDouble(),
+                        cardNumber: cardNumber!,
+                        phoneNumber: phoneNumber!,
                       ),
                     );
                     Navigator.push(
