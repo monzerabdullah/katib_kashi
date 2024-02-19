@@ -4,8 +4,7 @@ import 'package:katib_kashi/view_models/cards_view_model.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/cards_view.dart';
 import 'package:katib_kashi/views/home_view.dart';
-import 'package:katib_kashi/views/sign_in_view.dart';
-import 'package:katib_kashi/views/sign_up_view.dart';
+import 'package:katib_kashi/views/settings_view.dart';
 import 'package:katib_kashi/views/transactions_view.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Katib Kashi',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: kPrimary),
         useMaterial3: true,
       ),
       home: Scaffold(
@@ -97,18 +96,9 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-List<Widget> views = [
+List<Widget> views = const [
   HomeView(),
   TransactionsView(),
   CardsView(),
   SettingsView(),
 ];
-
-class SettingsView extends StatelessWidget {
-  const SettingsView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
