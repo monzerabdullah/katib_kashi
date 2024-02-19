@@ -5,7 +5,10 @@ import 'package:katib_kashi/view_models/cards_view_model.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/transaction_view.dart';
 import 'package:katib_kashi/views/transactions_view.dart';
+import 'package:katib_kashi/views/widgets/action_buttons.dart';
 import 'package:katib_kashi/views/widgets/custom_slider.dart';
+import 'package:katib_kashi/views/widgets/section.dart';
+import 'package:katib_kashi/views/widgets/starter_banner.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -48,51 +51,18 @@ class _HomeViewState extends State<HomeView> {
       body: CustomScrollView(
         slivers: [
           Provider.of<CardsViewModel>(context).allCards.isEmpty
-              ? SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(20),
-                        margin: EdgeInsets.all(5),
-                        width: 800,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: const LinearGradient(
-                            colors: [
-                              kSecondary,
-                              kPrimary,
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'No Cards Created Yet, Go To Cards Please',
-                          style: TextStyle(
-                            color: kWhite,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  ),
+              ? const SliverToBoxAdapter(
+                  child: StarterBanner(),
                 )
               : const SliverToBoxAdapter(
-                  child: const CustomSlider(),
+                  child: CustomSlider(),
                 ),
           const SliverToBoxAdapter(
-            child: const SizedBox(
-              height: 20,
-            ),
+            child: SizedBox(height: 20),
           ),
-          SliverToBoxAdapter(child: ActionButtons()),
-          SliverToBoxAdapter(child: const SizedBox(height: 16)),
-          SliverToBoxAdapter(child: Section()),
+          const SliverToBoxAdapter(child: ActionButtons()),
+          const SliverToBoxAdapter(child: SizedBox(height: 16)),
+          const SliverToBoxAdapter(child: Section()),
           Consumer<TransactionViewModel>(
             builder: (context, model, child) {
               return SliverList.builder(
@@ -111,140 +81,6 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class Section extends StatelessWidget {
-  const Section({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            'Recent Transactions',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: false).push(
-                MaterialPageRoute(
-                  builder: (context) => TransactionsView(),
-                ),
-              );
-            },
-            child: const Text(
-              'View all',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: kSecondary,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class ActionButtons extends StatelessWidget {
-  const ActionButtons({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ActionButton(
-            icon: Icons.arrow_upward,
-            label: 'Send',
-            transactionType: TransactionType.send,
-          ),
-          ActionButton(
-            icon: Icons.arrow_downward,
-            label: 'Recive',
-            transactionType: TransactionType.receiveOnly,
-          ),
-          ActionButton(
-            icon: Icons.swap_vert,
-            label: 'Exchange',
-            transactionType: TransactionType.receiveAndExchange,
-          ),
-          ActionButton(
-            icon: Icons.more_horiz,
-            label: 'More',
-            transactionType: TransactionType.send,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ActionButton extends StatelessWidget {
-  const ActionButton({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.transactionType,
-  });
-  final IconData icon;
-  final String label;
-  final TransactionType transactionType;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: 62,
-          height: 62,
-          child: IconButton.filled(
-            color: kSecondary,
-            iconSize: 35,
-            style: const ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(kGrey),
-            ),
-            onPressed: () {
-              // debugPrint('$selectedCardNumber');
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TransactionView(
-                    selectedTransaction: transactionType,
-                    selectedCardNumber: selectedCardNumber,
-                  ),
-                ),
-              );
-            },
-            icon: Icon(
-              icon,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-          ),
-        )
-      ],
     );
   }
 }
