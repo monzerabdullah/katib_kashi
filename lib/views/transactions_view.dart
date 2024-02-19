@@ -6,6 +6,9 @@ import 'package:katib_kashi/view_models/cards_view_model.dart';
 import 'package:katib_kashi/view_models/transation_view_model.dart';
 import 'package:katib_kashi/views/statistics_view.dart';
 import 'package:katib_kashi/views/transaction_details_view.dart';
+import 'package:katib_kashi/views/widgets/tabs/all_transactions_list.dart';
+import 'package:katib_kashi/views/widgets/tabs/reciving_transactions_list.dart';
+import 'package:katib_kashi/views/widgets/tabs/sending_transactions_list.dart';
 import 'package:provider/provider.dart';
 
 class TransactionsView extends StatelessWidget {
@@ -20,7 +23,7 @@ class TransactionsView extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => MyApp()),
+                MaterialPageRoute(builder: (context) => const MyApp()),
               );
             },
             icon: const Icon(
@@ -73,7 +76,7 @@ class TransactionsView extends StatelessWidget {
           foregroundColor: kWhite,
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => StatisticsView(),
+              builder: (context) => const StatisticsView(),
             ));
           },
           child: const Icon(
@@ -81,153 +84,6 @@ class TransactionsView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class AllTransactions extends StatelessWidget {
-  const AllTransactions({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<TransactionViewModel>(
-      builder: (contex, model, child) {
-        return ListView.builder(
-          itemCount: model.allTranasctions.length,
-          itemBuilder: (context, index) {
-            final transaction = model.allTranasctions[index];
-            return TransactionWidget(
-              dateTime: transaction.dateTime,
-              type: transaction.transactionType,
-              amount: transaction.moneyAmount,
-              cardNumber: transaction.cardNumber,
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class TransactionWidget extends StatelessWidget {
-  const TransactionWidget({
-    super.key,
-    required this.dateTime,
-    required this.amount,
-    required this.type,
-    required this.cardNumber,
-  });
-
-  final DateTime dateTime;
-  final int amount;
-  final TransactionType type;
-  final int cardNumber;
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => TransactionDetailsView(
-              dateTime: dateTime,
-              amount: amount,
-              type: type,
-            ),
-          ),
-        );
-      },
-      child: ListTile(
-        contentPadding: EdgeInsets.all(10),
-        leading: CircleAvatar(
-          radius: 32,
-          child: Icon(
-            type == TransactionType.send
-                ? Icons.arrow_upward
-                : Icons.arrow_downward,
-            color: kSecondary,
-          ),
-          backgroundColor: kGrey,
-        ),
-        title: Text(
-          Provider.of<CardsViewModel>(context)
-              .allCards
-              .singleWhere((card) => card.cardNumber == cardNumber)
-              .cardOwnerName,
-          style: TextStyle(
-            color: kDark,
-            fontSize: 18.0,
-          ),
-        ),
-        subtitle: Text(
-          '${dateTime.hour}:${dateTime.minute} ${dateTime.hashCode >= 12 ? 'PM' : 'AM'} • ${dateTime.month} ${dateTime.day},${dateTime.year}',
-          style: TextStyle(
-            color: Color(0xFFBDBDBD),
-            fontSize: 14,
-          ),
-        ),
-        trailing: Text(
-          '$amount EGP',
-          style: TextStyle(
-            color: kDark,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SendingTransactions extends StatelessWidget {
-  const SendingTransactions({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<TransactionViewModel>(
-      builder: (contex, model, child) {
-        final sendingTransactions = model.allTranasctions
-            .where((tr) => tr.transactionType == TransactionType.send)
-            .toList();
-        return ListView.builder(
-          itemCount: sendingTransactions.length,
-          itemBuilder: (context, index) {
-            final transaction = sendingTransactions[index];
-            return TransactionWidget(
-              dateTime: transaction.dateTime,
-              type: transaction.transactionType,
-              amount: transaction.moneyAmount,
-              cardNumber: transaction.cardNumber,
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class RecivesTransactions extends StatelessWidget {
-  const RecivesTransactions({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<TransactionViewModel>(
-      builder: (contex, model, child) {
-        final recivesTransactions = model.allTranasctions
-            .where((tr) => tr.transactionType != TransactionType.send)
-            .toList();
-        return ListView.builder(
-          itemCount: recivesTransactions.length,
-          itemBuilder: (context, index) {
-            final transaction = recivesTransactions[index];
-            return TransactionWidget(
-              dateTime: transaction.dateTime,
-              type: transaction.transactionType,
-              amount: transaction.moneyAmount,
-              cardNumber: transaction.cardNumber,
-            );
-          },
-        );
-      },
     );
   }
 }

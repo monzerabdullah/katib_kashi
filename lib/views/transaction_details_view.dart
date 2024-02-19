@@ -4,6 +4,7 @@ import 'package:katib_kashi/utils/constants.dart';
 
 class TransactionDetailsView extends StatelessWidget {
   const TransactionDetailsView({
+    super.key,
     required this.dateTime,
     required this.amount,
     required this.type,

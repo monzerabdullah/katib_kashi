@@ -9,6 +9,7 @@ import 'package:katib_kashi/views/widgets/action_buttons.dart';
 import 'package:katib_kashi/views/widgets/custom_slider.dart';
 import 'package:katib_kashi/views/widgets/section.dart';
 import 'package:katib_kashi/views/widgets/starter_banner.dart';
+import 'package:katib_kashi/views/widgets/transaction_custom_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {

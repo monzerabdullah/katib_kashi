@@ -29,7 +29,6 @@ class _TransactionViewState extends State<TransactionView> {
   double? fees;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     transactionType = widget.selectedTransaction;
     cardNumber = widget.selectedCardNumber;
@@ -37,7 +36,6 @@ class _TransactionViewState extends State<TransactionView> {
 
   @override
   Widget build(BuildContext context) {
-    // cardNumber = widget.selectedCardNumber;
     debugPrint('card number value at first time widget is created $cardNumber');
 
     return Scaffold(
@@ -79,25 +77,6 @@ class _TransactionViewState extends State<TransactionView> {
               const SizedBox(
                 height: 80,
               ),
-              // TextField(
-              //   onChanged: (value) {
-              //     cardNumber = value;
-              //   },
-              //   decoration: InputDecoration(
-              //     contentPadding: const EdgeInsets.all(20),
-              //     filled: true,
-              //     fillColor: kGrey,
-              //     hintText: 'Card',
-              //     hintStyle: const TextStyle(
-              //       color: kSecondaryText,
-              //       fontSize: 16.0,
-              //     ),
-              //     focusColor: kSecondary,
-              //     border: OutlineInputBorder(
-              //       borderRadius: BorderRadius.circular(20),
-              //     ),
-              //   ),
-              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Consumer<CardsViewModel>(
